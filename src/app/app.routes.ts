@@ -4,7 +4,7 @@ import { HistoireComponent } from './pages/histoire/histoire.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ActualitesComponent } from './pages/actualites/actualites.component';
-import { PatrimoineComponent } from './pages/patrimoine/patrinoine.component';
+import { PatrimoineComponent } from './pages/patrimoine/patrimoine.component';
 import { TourismeComponent } from './pages/tourisme/tourisme.component';
 import { MarcheArtComponent } from './pages/marche-art/marche-art.component';
 import { AProposComponent } from './pages/a-propos/a-propos.component';
