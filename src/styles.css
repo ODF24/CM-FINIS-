@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+:root {
+  --gold: #C8973A;
+  --gold-light: #F0C060;
+  --gold-dim: #8B6914;
+  --dark-green: #1A3A2A;
+  --text-light: #F5EDD8;
+  --text: #e8dfc8;
+  --text-dim: #a09070;
+  --nav-h: 80px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #0a0a0a;
+  color: var(--text-light);
+  cursor: default;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; }

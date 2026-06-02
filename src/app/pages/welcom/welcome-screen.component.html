@@ -1,0 +1,73 @@
+<div class="welcome-root">
+  <!-- Fond animé -->
+  <div class="bg-layer"></div>
+  <div class="bg-overlay"></div>
+  <div class="particles" id="particles"></div>
+  <div class="scanlines"></div>
+
+  <!-- Orbes décoratifs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Contenu central -->
+  <div class="welcome-content" [class.visible]="showContent">
+
+    <!-- Logo animé -->
+    <div class="logo-wrap">
+      <div class="logo-ring ring-outer"></div>
+      <div class="logo-ring ring-inner"></div>
+      <img
+        src="assets/logo/LOGO 1.png"
+        class="logo-img"
+        alt="Congo Metaverse Logo"
+        onerror='this.src="https://res.cloudinary.com/dcno88ooa/image/upload/q_auto/f_auto/v1775226034/LOGO_1_je4iws.png"'
+      />
+    </div>
+
+    <!-- Texte de bienvenue -->
+    <div class="welcome-text">
+      <div class="eyebrow">République du Congo · Metaverse</div>
+      <h1 class="welcome-title">
+        Bienvenue,<br/>
+        <span class="name-highlight">{{ userName }}</span>
+      </h1>
+      <div class="divider-line"></div>
+      <p class="welcome-desc">
+        Vous êtes sur le point de vivre une expérience unique.<br/>
+        Plongez dans l'histoire, la culture et les merveilles<br/>
+        de la République du Congo.
+      </p>
+    </div>
+
+    <!-- Badges features -->
+    <div class="feature-badges">
+      <div class="badge">
+        <span class="badge-icon">🌍</span>
+        <span>Exploration</span>
+      </div>
+      <div class="badge">
+        <span class="badge-icon">🏛️</span>
+        <span>Histoire</span>
+      </div>
+      <div class="badge">
+        <span class="badge-icon">🎨</span>
+        <span>Culture</span>
+      </div>
+      <div class="badge">
+        <span class="badge-icon">🌿</span>
+        <span>Nature</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn-enter" (click)="continue()">
+      <span>Commencer l'aventure</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <p class="step-indicator">Étape 1 sur 3</p>
+  </div>
+</div>

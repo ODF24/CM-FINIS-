@@ -1,0 +1,99 @@
+<div class="tour-root">
+
+
+  <!-- ══ VUE LISTE ══ -->
+  <div class="liste-view" *ngIf="!detail">
+
+
+    <!-- En-tête -->
+    <header class="tour-header">
+      <h1>Découvrez tous nos<br/><span class="accent-text">Patrimoine Touristiques</span></h1>
+      <div class="tricolor-bar">
+        <span class="tc-r"></span><span class="tc-j"></span><span class="tc-v"></span>
+      </div>
+      <div class="header-body">
+        <p>Dans cet espace, vous êtes invités à voyager au cœur des paysages du Congo.</p>
+        <p>Ce monde virtuel vous ouvre les portes du patrimoine touristique congolais : des monuments, des fleuves majestueux aux forêts profondes, des sites naturels spectaculaires aux lieux emblématiques qui attirent et émerveillent.</p>
+        <p class="italic-line">Ici, la nature rencontre l'émotion.<br/>Explorez des horizons uniques, ressentez la force des éléments et découvrez un Congo authentique, vivant et inspirant. <em class="bold-cta">Bienvenue au cœur touristique du Congo.</em></p>
+      </div>
+    </header>
+
+    <!-- Grille destinations -->
+    <section class="dest-grid">
+      <div *ngFor="let dest of destinations" class="dest-card" (click)="ouvrirDetail(dest)">
+        <div class="card-img">
+          <img [src]="dest.image" [alt]="dest.nom"/>
+          <div class="card-gradient"></div>
+          <div class="cat-badge">{{ dest.categorie }}</div>
+          <div class="card-info">
+            <p class="card-lieu">{{ dest.lieu }}</p>
+            <h3 class="card-nom">{{ dest.nom }}</h3>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-action demo" (click)="ouvrirDetail(dest); $event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Video Demo
+          </button>
+          <button class="btn-action visite" (click)="ouvrirDetail(dest); $event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Visite virtuelle 3D
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="scroll-down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2.5" width="28" height="28"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2" width="24" height="24" style="margin-top:-12px;opacity:0.4"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+
+  <!-- ══ VUE DÉTAIL ══ -->
+  <div class="detail-view" *ngIf="detail">
+    <button class="btn-retour" (click)="retour()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/></svg>
+      Retour
+    </button>
+
+    <div class="detail-inner">
+      <div class="detail-left">
+        <div class="detail-cat-badge">{{ detail.categorie }}</div>
+        <h2>L'Histoire {{ detail.nom.startsWith('L') ? 'de ' : 'du ' }}{{ detail.nom | lowercase }}</h2>
+        <p class="detail-subtitle">Laissez-vous transporter à travers l'histoire.</p>
+
+        <div class="video-wrap">
+          <iframe [src]="detail.videoUrl | safe" allowfullscreen title="Vidéo"></iframe>
+        </div>
+
+        <div class="detail-histoire">
+          <div class="hist-icon">🌿</div>
+          <p>{{ detail.histoire }}</p>
+        </div>
+      </div>
+
+      <aside class="detail-aside">
+        <div class="aside-card">
+          <div class="aside-img">
+            <img [src]="detail.image" [alt]="detail.nom"/>
+            <div class="aside-gradient">
+              <h4>{{ detail.nom }}</h4>
+            </div>
+          </div>
+          <button class="btn-visite-3d">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Visite Virtuelle 3D
+          </button>
+        </div>
+
+        <button class="btn-apropos">À propos</button>
+
+        <div class="aside-desc">
+          <div class="aside-desc-icon">📍</div>
+          <p>{{ detail.description }}</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+</div>

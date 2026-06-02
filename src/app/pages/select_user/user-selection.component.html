@@ -1,0 +1,52 @@
+<div class="selection-root">
+  <div class="bg-layer"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="selection-content" [class.visible]="showContent">
+    <div class="header">
+      <div class="eyebrow">Étape 2 sur 3</div>
+      <h1>Qui êtes-vous ?</h1>
+      <p class="subtitle">Choisissez votre profil pour personnaliser votre expérience Congo Metaverse</p>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="cards-grid">
+      <button
+        *ngFor="let type of userTypes"
+        class="type-card"
+        [class.selected]="selected === type.id"
+        [style.--card-color]="type.color"
+        (click)="select(type.id)"
+        type="button"
+      >
+        <div class="card-glow"></div>
+        <span class="card-icon">{{ type.icon }}</span>
+        <h3>{{ type.label }}</h3>
+        <p>{{ type.desc }}</p>
+        <div class="check-badge" [class.visible]="selected === type.id">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <div class="actions">
+      <button class="btn-confirm" [disabled]="!selected || loading" (click)="confirm()">
+        <span *ngIf="loading">
+          <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="10"/>
+          </svg>
+          Chargement...
+        </span>
+        <span *ngIf="!loading">
+          Continuer l'immersion
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </span>
+      </button>
+      <p class="hint" *ngIf="!selected">Sélectionnez un profil pour continuer</p>
+    </div>
+  </div>
+</div>

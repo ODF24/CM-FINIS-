@@ -1,0 +1,159 @@
+<div class="about-container">
+  
+  <!-- SECTION 1: Bienvenue & Vision -->
+  <section class="hero-section">
+    <h1 class="main-title">Bienvenue dans Congo Metaverse</h1>
+    <div class="underline-flag"></div>
+
+    <div class="grid-container row-reverse-mobile">
+      <div class="text-column">
+        <h2 class="title-green">À propos de Congo Metaverse</h2>
+        <div class="content-block border-yellow">
+          <p>Projet initié par la startup de <span class="highlight-yellow">"ODF.VISION"</span> une startup spécialisée 3D, réalité virtuelle et développement de jeux vidéo basée au Congo-Brazzaville.</p>
+          <p>Congo Metaverse est la première plateforme congolaise de visites virtuelles dédiée à la découverte et à la valorisation des patrimoines culturels et touristiques du Congo. Elle offre une expérience immersive innovante grâce à l'intégration progressive des technologies de la 3D immersive et de la réalité virtuelle.</p>
+          <p>Accessible depuis tout appareil connecté à Internet (ordinateur, tablette, smartphone), la plateforme ne nécessite aucun équipement spécifique, garantissant une expérience fluide et inclusive pour tous les utilisateurs, au Congo comme à l'international.</p>
+          <p>Congo Metaverse ambitionne de devenir un outil de transmission, de promotion et de préservation du patrimoine congolais, en mettant le numérique au service de la culture, du tourisme et de l'éducation.</p>
+        </div>
+      </div>
+      <div class="image-column centered">
+        <img src="assets/images/characters-vr.png" alt="Personnages Congo Metaverse VR" class="responsive-img">
+      </div>
+    </div>
+
+    <div class="grid-container margin-top-md">
+      <div class="image-column hidden-mobile"></div>
+      <div class="text-column">
+        <h2 class="title-red">Notre Vision</h2>
+        <div class="content-block border-green">
+          <p>Notre vision est de faire du Congo un référent africain du patrimoine numérique, en transformant son histoire, sa culture et ses paysages en expériences immersives accessibles à tous. Nous croyons que la technologie peut :</p>
+          <ul class="custom-list">
+            <li>préserver la mémoire collective</li>
+            <li>éduquer les jeunes</li>
+            <li>promouvoir le tourisme</li>
+            <li>connecter le Congo au monde</li>
+          </ul>
+          <p class="italic-text">Le passé devient interactif. Le futur devient accessible.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-arrow-down">
+      <span>▼</span>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Mission & Pourquoi & Formulaire -->
+  <section class="mission-section">
+    <div class="grid-container">
+      <div class="text-column">
+        <h2 class="title-green">Notre mission</h2>
+        <div class="content-block border-red">
+          <p>Notre mission est de préserver et transmettre l'héritage du Congo en le rendant vivant, accessible et immersif grâce aux technologies numériques. À travers Congo Metaverse, nous transformons la mémoire, la culture et les territoires congolais en expériences virtuelles capables d'éduquer, d'inspirer et de connecter les générations d'aujourd'hui et de demain.</p>
+          <p>Congo Metaverse a pour mission secondaire de :</p>
+          <ul class="custom-list">
+            <li>Numériser le patrimoine congolais en 3D</li>
+            <li>Créer des expériences immersives éducatives</li>
+            <li>Valoriser la culture et l'identité nationale</li>
+            <li>Promouvoir le tourisme et l'innovation</li>
+            <li>Inspirer la jeunesse africaine par le numérique</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image-column centered">
+        <img src="assets/images/avatar-3d.png" alt="Avatar Congo Metaverse" class="responsive-img avatar-img">
+      </div>
+    </div>
+
+    <div class="grid-container margin-top-md">
+      <div class="form-column">
+        <div class="info-form-card">
+          <h3>Demande de renseignements</h3>
+          <form [formGroup]="renseignementForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>Nom(s) et Prénom(s) :</label>
+              <input type="text" formControlName="nomComplet">
+            </div>
+            <div class="form-group">
+              <label>Adresse Email :</label>
+              <input type="email" formControlName="email">
+            </div>
+            <div class="form-group">
+              <label>Numéro de Téléphone :</label>
+              <input type="tel" formControlName="telephone">
+            </div>
+            <div class="form-group">
+              <label>Statut professionnel :</label>
+              <input type="text" formControlName="statut">
+            </div>
+            <div class="form-group">
+              <label>Sujet de votre demande :</label>
+              <textarea formControlName="sujet" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn-submit" [disabled]="renseignementForm.invalid">ENVOYEZ</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="text-column alignment-flex-end">
+        <h2 class="title-yellow">Pourquoi Congo Metaverse</h2>
+        <div class="content-block border-green">
+          <p>Un pays sans mémoire est un pays sans repères. Lorsque l'histoire n'est pas transmise, elle s'efface. Lorsque le patrimoine n'est pas valorisé, il devient invisible. Congo Metaverse est né pour combler ce vide, pour redonner une voix aux lieux, aux récits et aux symboles qui façonnent l'identité du Congo.</p>
+          <p>Parce que l'histoire mérite d'être vécue, pas seulement racontée. Parce que le patrimoine congolais est riche, mais encore peu visible à l'échelle mondiale. Parce que le futur du tourisme et de la culture passe par l'innovation numérique.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-arrows">
+      <span class="arrow-up">▲</span>
+      <span class="arrow-down">▼</span>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Partenaires & Footer -->
+  <section class="partners-section">
+    <div class="partners-header">
+      <div class="vertical-indicator-green"></div>
+      <h2 class="title-yellow text-center">Nos Partenaires</h2>
+      <div class="underline-flag center-block"></div>
+    </div>
+    
+    <div class="partners-intro-box">
+      <p>Congo Metaverse est un projet collaboratif qui se construit avec celles et ceux qui partagent une même vision : valoriser le patrimoine congolais et le projeter dans le futur grâce au numérique. Institutions, organisations, entreprises et acteurs culturels sont au cœur de cette dynamique, contribuant par leur expertise, leur engagement et leur confiance à faire de Congo Metaverse une plateforme d'impact, durable et ouverte sur le monde.</p>
+      <div class="vertical-indicator-red"></div>
+    </div>
+
+    <div class="partners-logos-band">
+      <img src="assets/logos/ministere-industrie.png" alt="Ministère de l'industrie">
+      <img src="assets/logos/odf-vision.png" alt="ODF Vision">
+      <img src="assets/logos/jeunesse-perspectives.png" alt="Jeunesse et Perspectives">
+      <img src="assets/logos/wikimedia.png" alt="Wikimedia Foundation">
+      <img src="assets/logos/mtn.png" alt="MTN">
+      <img src="assets/logos/snpc.png" alt="SNPC">
+      <img src="assets/logos/regard-afrique.png" alt="Complexe Scolaire Regard d'Afrique">
+    </div>
+
+    <footer class="about-footer">
+      <h3 class="title-yellow">Contacts</h3>
+      <div class="underline-flag center-block small-width"></div>
+      
+      <div class="footer-navigation">
+        <span class="arrow-up-large">▲</span>
+        <div class="social-icons">
+          <a href="#" class="icon icon-fb"></a>
+          <a href="#" class="icon icon-ig"></a>
+          <a href="#" class="icon icon-in"></a>
+          <a href="#" class="icon icon-yt"></a>
+          <a href="#" class="icon icon-mail"></a>
+          <a href="#" class="icon icon-wa"></a>
+        </div>
+        <span class="arrow-up-large">▲</span>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© Copyright ODF.vision 2026. All Rights Reserved Designed by ODF.vision.</p>
+        <span class="version-tag">Beta V1.0</span>
+      </div>
+    </footer>
+  </section>
+
+</div>

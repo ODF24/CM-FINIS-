@@ -1,0 +1,111 @@
+<div class="dash-root">
+  <!-- Fond animé -->
+  <div class="dash-bg"></div>
+  <div class="dash-glow"></div>
+
+  <!-- HEADER du Dashboard -->
+  <header class="dash-header">
+    <div class="dash-header-inner">
+      <div class="user-hero">
+        <div class="avatar-ring">
+          <div class="avatar">{{ initials }}</div>
+        </div>
+        <div class="user-info">
+          <p class="greeting-label">Tableau de bord</p>
+          <h1 class="user-name">{{ profile?.full_name || 'Explorateur' }}</h1>
+          <p class="user-email">{{ profile?.email }}</p>
+          <div class="user-badges">
+            <span *ngIf="userTypeInfo" class="badge-type" [style.background]="userTypeInfo.color + '22'" [style.border-color]="userTypeInfo.color + '55'">
+              {{ userTypeInfo.icon }} {{ userTypeInfo.label }}
+            </span>
+            <span class="badge-member">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Membre depuis {{ memberSince }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-logout" (click)="logout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Déconnexion
+      </button>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <!-- STATS -->
+    <section class="section-block">
+      <h2 class="section-title">
+        <span class="section-icon">📊</span> Statistiques
+      </h2>
+      <div class="stats-grid">
+        <div *ngFor="let s of stats" class="stat-card">
+          <div class="stat-icon" [style.color]="s.color">{{ s.icon }}</div>
+          <div class="stat-value" [style.color]="s.color">{{ s.value }}</div>
+          <div class="stat-label">{{ s.label }}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCÈS RAPIDE -->
+    <section class="section-block">
+      <h2 class="section-title">
+        <span class="section-icon">🚀</span> Accès rapide
+      </h2>
+      <div class="links-grid">
+        <a *ngFor="let l of quickLinks" [routerLink]="l.route" class="quick-card">
+          <span class="quick-icon">{{ l.icon }}</span>
+          <div>
+            <div class="quick-label">{{ l.label }}</div>
+            <div class="quick-desc">{{ l.desc }}</div>
+          </div>
+          <svg class="quick-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- PROFIL -->
+    <section class="section-block">
+      <h2 class="section-title">
+        <span class="section-icon">👤</span> Mon profil
+      </h2>
+      <div class="profile-card">
+        <div class="profile-row">
+          <span class="prow-label">Nom complet</span>
+          <span class="prow-val">{{ profile?.full_name || '—' }}</span>
+        </div>
+        <div class="profile-row">
+          <span class="prow-label">Adresse email</span>
+          <span class="prow-val">{{ profile?.email || '—' }}</span>
+        </div>
+        <div class="profile-row">
+          <span class="prow-label">Type d'utilisateur</span>
+          <span class="prow-val">
+            <ng-container *ngIf="userTypeInfo; else noType">
+              {{ userTypeInfo.icon }} {{ userTypeInfo.label }}
+            </ng-container>
+            <ng-template #noType>
+              <span class="no-type">Non défini</span>
+            </ng-template>
+          </span>
+        </div>
+        <div class="profile-row">
+          <span class="prow-label">Immersion</span>
+          <span class="prow-val">
+            <span *ngIf="profile?.has_seen_immersion" class="badge-done">✅ Complétée</span>
+            <span *ngIf="!profile?.has_seen_immersion" class="badge-pending">⏳ En attente</span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

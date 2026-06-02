@@ -1,0 +1,142 @@
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 36px; height: 80px;
+  background: rgba(10,28,20,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200,151,58,0.2);
+  position: fixed; width: 100%; z-index: 100; top: 0;
+}
+
+/* ── LOGO ─────────────────────────────────────── */
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.logo-img-wrapper{  width: 52px; height: 52px; border-radius: 50%; box-shadow: 0 0 18px var(--glow); animation: spin-slow 20s linear infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.logo-img { width: 100%; height: 100%; object-fit: contain; }
+.logo-texts { line-height: 1.15; }
+.logo-text { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 500; color: white; letter-spacing: 2px; display: block; }
+.logo-sub { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 4px; color: #c8973a; font-weight: 400; display: block; }
+
+/* ── LIENS ────────────────────────────────────── */
+.nav-links { display: flex; gap: 0; list-style: none; align-items: center; height: 100%; }
+.nav-links li { height: 100%; display: flex; align-items: center; position: relative; }
+.nav-links a {
+  font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(245,237,216,0.75); text-decoration: none; font-weight: 600;
+  padding: 0 14px; height: 100%; display: flex; align-items: center;
+  border-bottom: 2px solid transparent; transition: color 0.25s, border-color 0.25s;
+}
+.nav-links a.active { color: #f0c060; border-bottom-color: #c8973a; }
+.nav-links a:hover  { color: #f0c060; border-bottom-color: rgba(200,151,58,0.4); }
+.chev { font-size: 0.42rem; margin-left: 5px; transition: transform 0.3s; }
+.active-menu .chev { transform: rotate(180deg); }
+
+/* ── DROPDOWN PATRIMOINE ─────────────────────── */
+.submenu {
+  position: absolute; top: 80px; left: 0;
+  background: rgba(8,22,14,0.97); backdrop-filter: blur(16px);
+  list-style: none; min-width: 220px;
+  border: 1px solid rgba(200,151,58,0.25); border-top: none;
+  border-radius: 0 0 12px 12px;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: all 0.3s ease; padding: 8px 0; z-index: 200;
+}
+.dropdown:hover .submenu, .dropdown.active-menu .submenu { opacity: 1; visibility: visible; transform: translateY(0); }
+.submenu li { width: 100%; height: auto; }
+.submenu li a {
+  padding: 11px 18px !important; font-size: 0.64rem !important;
+  height: auto !important; border-bottom: none !important;
+  display: block !important; letter-spacing: 1px !important;
+  color: rgba(245,237,216,0.75) !important;
+}
+.submenu li a:hover { background: rgba(200,151,58,0.15); color: #f0c060 !important; }
+
+/* ── DROITE ───────────────────────────────────── */
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
+.btn-premium {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 14px; border-radius: 20px;
+  background: rgba(139,105,20,0.2);
+  border: 1px solid rgba(200,151,58,0.4);
+  color: #f0c060; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s;
+  text-decoration: none;
+}
+.btn-premium:hover { background: rgba(200,151,58,0.3); }
+
+/* ── ICÔNE PERSONNE (non connecté) ──────────── */
+.user-icon-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(200,151,58,0.3);
+  color: rgba(245,237,216,0.75); transition: all 0.25s;
+  text-decoration: none;
+}
+.user-icon-btn:hover { border-color: #c8973a; color: #f0c060; background: rgba(200,151,58,0.1); }
+
+/* ── MENU UTILISATEUR (connecté) ─────────────── */
+.user-menu-wrap { position: relative; }
+.user-avatar-btn {
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.nav-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #8b6914, #c8973a);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700;
+  color: #fff; letter-spacing: 1px;
+  border: 2px solid rgba(200,151,58,0.5);
+  transition: box-shadow 0.25s;
+}
+.user-menu-wrap:hover .nav-avatar,
+.user-menu-wrap.open .nav-avatar {
+  box-shadow: 0 0 0 3px rgba(200,151,58,0.35);
+}
+
+/* ── DROPDOWN UTILISATEUR ────────────────────── */
+.user-dropdown {
+  position: absolute; top: calc(100% + 12px); right: 0;
+  width: 240px;
+  background: rgba(8,18,12,0.97); backdrop-filter: blur(20px);
+  border: 1px solid rgba(200,151,58,0.25); border-radius: 14px;
+  padding: 8px 0; z-index: 300;
+  opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.97);
+  transform-origin: top right;
+  transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.user-menu-wrap.open .user-dropdown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+.ud-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+}
+.ud-avatar {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #8b6914, #c8973a);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; color: #fff;
+}
+.ud-name { font-size: 0.82rem; font-weight: 700; color: #f5edd8; margin-bottom: 2px; }
+.ud-email { font-size: 0.65rem; color: #a09070; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 150px; }
+
+.ud-divider { height: 1px; background: rgba(200,151,58,0.12); margin: 4px 0; }
+
+.ud-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; font-size: 0.75rem; color: rgba(245,237,216,0.75);
+  text-decoration: none; cursor: pointer;
+  background: none; border: none; width: 100%; text-align: left;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Raleway', sans-serif; font-weight: 600; letter-spacing: 0.5px;
+}
+.ud-item svg { opacity: 0.6; flex-shrink: 0; }
+.ud-item:hover { background: rgba(200,151,58,0.1); color: #f0c060; }
+.ud-item:hover svg { opacity: 1; }
+.ud-logout { color: rgba(255,150,150,0.7); }
+.ud-logout:hover { background: rgba(139,0,0,0.2); color: #ff9999; }
+
+@media (max-width: 1100px) {
+  .nav-links { display: none; }
+  nav { padding: 0 18px; }
+}

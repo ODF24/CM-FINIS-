@@ -1,0 +1,80 @@
+<section class="hero" id="detail">
+  <div class="container">
+    
+    <!-- Bouton Retour -->
+    <div class="back-container fade-up">
+      <a routerLink="/histoire" class="btn-back">
+        <span class="orange-text">&lt;&lt;</span> Retour aux bâtisseurs
+      </a>
+    </div>
+
+    <!-- En-tête -->
+    <div class="header fade-up">
+      <h1 *ngIf="president">{{ president.nom }}</h1>
+      <p class="subtitle">Découvrez les figures historiques qui ont façonné la République du Congo</p>
+    </div>
+
+    <!-- Grille de contenu -->
+    <div *ngIf="president; else notFound" class="content">
+      
+      <!-- ZONE GAUCHE : VISUEL PRINCIPAL (VIDÉO) -->
+      <div class="video-box fade-up">
+        <div class="video-container">
+          
+          <!-- Utilisation de la balise vidéo si disponible -->
+          <video 
+            *ngIf="president.video" 
+            [src]="president.video" 
+            class="detail-main-img" 
+            controls 
+            playsinline>
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+
+          <!-- Image de remplacement si aucune vidéo n'est renseignée -->
+          <img *ngIf="!president.video" [src]="president.img" [alt]="president.nom" class="detail-main-img"/>
+
+          <div class="video-overlay-shadow"></div>
+        </div>
+      </div>
+
+      <!-- ZONE DROITE : PROFIL ET INFOS -->
+      <div class="profile fade-up">
+        
+        <!-- Carte de portrait avec décor -->
+        <div class="profile-card">
+          <div class="profile-img-container">
+            <img [src]="president.img" [alt]="president.nom" class="portrait-img"/>
+          </div>
+          <div class="ethnic-decor">
+            <img src="https://res.cloudinary.com/dcno88ooa/image/upload/q_auto/f_auto/v1775226034/LOGO-acc_dmr8xp.png" class="logo-img" alt="Logo"/>
+          </div>
+        </div>
+
+        <!-- Texte À Propos -->
+        <div class="about">
+          <h3>À Propos</h3>
+          <p class="main-bio">{{ president.bio }}</p>
+          
+          <div class="info-list">
+            <p><strong>Naissance :</strong> <span>{{ president.naissance }}</span></p>
+            <p><strong>Décès :</strong> <span>{{ president.deces }}</span></p>
+            <p><strong>Mandat :</strong> <span>{{ president.mandat }}</span></p>
+            <p><strong>Parti :</strong> <span>{{ president.parti }}</span></p>
+            <p *ngIf="president.conjoint"><strong>Époux(se) :</strong> <span>{{ president.conjoint }}</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Template si non trouvé -->
+    <ng-template #notFound>
+      <div class="not-found">
+        <p>Président introuvable.</p>
+        <a routerLink="/histoire" class="btn-back">Retour à l'histoire</a>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

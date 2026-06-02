@@ -1,0 +1,47 @@
+<div class="imm-root" [class.done]="completed">
+  <!-- Fond -->
+  <div class="imm-bg" [style.background-image]="'url('+scenes[currentScene].img+')'"></div>
+  <div class="imm-overlay"></div>
+
+  <!-- Particules -->
+  <div class="particles-layer">
+    <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" class="p-dot" [style.left]="(i*9+3)+'%'" [style.animation-delay]="(i*0.4)+'s'"></div>
+  </div>
+
+  <!-- Contenu slide -->
+  <div class="imm-content">
+    <div class="slide-icon">{{ scenes[currentScene].icon }}</div>
+    <div class="step-indicator">{{ currentScene + 1 }} / {{ scenes.length }}</div>
+    <h1 class="slide-title">{{ scenes[currentScene].title }}</h1>
+    <div class="slide-divider"><span></span><span class="gem">◆</span><span></span></div>
+    <p class="slide-text">{{ scenes[currentScene].text }}</p>
+
+    <div class="nav-buttons">
+      <button class="btn-nav prev" *ngIf="currentScene > 0" (click)="prevScene()">← Précédent</button>
+      <button class="btn-nav next" *ngIf="currentScene < scenes.length - 1" (click)="nextScene()">Suivant →</button>
+      <button class="btn-finish" *ngIf="currentScene === scenes.length - 1" (click)="enterSite()">
+        <span *ngIf="!completed">Entrer dans Congo Metaverse 🇨🇬</span>
+        <span *ngIf="completed">Bienvenue… ✨</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Barre de progression -->
+  <div class="prog-bar">
+    <div class="prog-fill" [style.width]="progress + '%'"></div>
+  </div>
+
+  <!-- Dots -->
+  <div class="dots-nav">
+    <div *ngFor="let s of scenes; let i = index" class="dot" [class.active]="i === currentScene" (click)="goToScene(i)"></div>
+  </div>
+
+  <!-- Étapes -->
+  <div class="progress-steps">
+    <div class="step"><div class="step-dot done"></div><span>Bienvenue</span></div>
+    <div class="step-line done"></div>
+    <div class="step"><div class="step-dot done"></div><span>Profil</span></div>
+    <div class="step-line done"></div>
+    <div class="step active"><div class="step-dot active"></div><span>Immersion</span></div>
+  </div>
+</div>

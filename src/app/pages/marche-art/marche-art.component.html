@@ -1,0 +1,140 @@
+<div class="marche-root">
+
+  <!-- ══ HEADER avec filtres à droite ══ -->
+  <header class="marche-header">
+    <div class="header-bg"></div>
+
+    <div class="header-top">
+      <!-- Gauche : titre + description -->
+      <div class="header-left">
+        <h1>Marché d'Arts <span class="accent">Congolais</span></h1>
+        <p class="header-desc">
+          Découvrez notre sélection exclusive d'art made au Congo et plongez dans l'univers
+          des artistes congolais. Un espace illustrant un art et savoir-faire,
+          de la tenue locale et des palmes talons du pays —
+          <em>célèbre façon du Congo.</em>
+        </p>
+      </div>
+
+      <!-- Droite : filtres verticaux -->
+      <div class="filtres-bar">
+        <button
+          *ngFor="let f of filtres"
+          class="filtre-btn"
+          [class.active]="filtreActif === f.id"
+          (click)="setFiltre(f.id)">
+          {{ f.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="header-divider"></div>
+  </header>
+
+  <!-- ══ GRILLE ══ -->
+  <section class="oeuvres-grid">
+    <div *ngFor="let oeuvre of oeuvresFiltrees" class="art-card" (click)="openModal(oeuvre)">
+      <div class="art-badge" [style.background]="oeuvre.badgeColor">{{ oeuvre.badge }}</div>
+      <div class="art-img-wrap">
+        <img [src]="oeuvre.image" [alt]="oeuvre.titre" loading="lazy"/>
+        <div class="art-overlay"><span class="overlay-cta">Voir détails →</span></div>
+      </div>
+      <div class="art-body">
+        <p class="art-categorie">{{ oeuvre.categorie | titlecase }}</p>
+        <h3 class="art-titre">{{ oeuvre.titre }}</h3>
+        <p class="art-artiste">Par {{ oeuvre.artiste }}</p>
+        <div class="art-footer">
+          <div class="art-prix">
+            <span class="prix-label">Prix</span>
+            <span class="prix-val">{{ formaterPrix(oeuvre.prix) }}</span>
+          </div>
+          <button class="btn-acquerir" (click)="openModal(oeuvre); $event.stopPropagation()">ACQUÉRIR</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="oeuvresFiltrees.length === 0" class="empty-state">
+      <span>🎨</span>
+      <p>Aucune œuvre dans cette catégorie.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-backdrop" *ngIf="modalOeuvre" (click)="closeModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+
+    <!-- Détail -->
+    <div class="modal-inner" *ngIf="modalView === 'detail'">
+      <div class="modal-img-wrap">
+        <img [src]="modalOeuvre!.image" [alt]="modalOeuvre!.titre"/>
+        <div class="modal-badge" [style.background]="modalOeuvre!.badgeColor">{{ modalOeuvre!.badge }}</div>
+      </div>
+      <div class="modal-info">
+        <p class="modal-cat">{{ modalOeuvre!.categorie | titlecase }}</p>
+        <h2 class="modal-titre">{{ modalOeuvre!.titre }}</h2>
+        <p class="modal-artiste">Par <strong>{{ modalOeuvre!.artiste }}</strong></p>
+        <p class="modal-desc">{{ modalOeuvre!.description }}</p>
+        <div class="modal-meta">
+          <div class="meta-item"><span class="meta-lbl">Dimensions</span><span class="meta-val">{{ modalOeuvre!.dimensions }}</span></div>
+          <div class="meta-item"><span class="meta-lbl">Année</span><span class="meta-val">{{ modalOeuvre!.annee }}</span></div>
+          <div class="meta-item"><span class="meta-lbl">Technique</span><span class="meta-val">{{ modalOeuvre!.categorie | titlecase }}</span></div>
+        </div>
+        <div class="modal-prix-wrap">
+          <div>
+            <span class="modal-prix-lbl">Prix</span>
+            <div class="modal-prix">{{ formaterPrix(modalOeuvre!.prix) }}</div>
+          </div>
+          <button class="btn-modal-acquerir" (click)="goToForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            Faire une demande
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="modal-form-view" *ngIf="modalView === 'form'">
+      <button class="back-btn" (click)="backToDetail()">← Retour</button>
+      <h3>Demande d'acquisition</h3>
+      <p class="form-subtitle">Pour <em>« {{ modalOeuvre!.titre }} »</em> — {{ formaterPrix(modalOeuvre!.prix) }}</p>
+      <form (ngSubmit)="submitForm()">
+        <div class="f-group">
+          <label>Nom complet *</label>
+          <input type="text" [(ngModel)]="formNom" name="formNom" required placeholder="Votre nom"/>
+        </div>
+        <div class="f-group">
+          <label>Adresse email *</label>
+          <input type="email" [(ngModel)]="formEmail" name="formEmail" required placeholder="votre@email.com"/>
+        </div>
+        <div class="f-group">
+          <label>Message (optionnel)</label>
+          <textarea [(ngModel)]="formMessage" name="formMessage" rows="3" placeholder="Questions, précisions…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" [disabled]="formLoading || !formNom || !formEmail">
+          <i class="fas fa-spinner fa-spin" *ngIf="formLoading"></i>
+          <svg *ngIf="!formLoading" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          {{ formLoading ? 'Envoi en cours…' : 'Envoyer la demande' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Confirmation -->
+    <div class="modal-sent-view" *ngIf="modalView === 'sent'">
+      <div class="sent-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="36" height="36">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3>Demande envoyée !</h3>
+      <p>Votre demande pour<br/><strong>« {{ modalOeuvre!.titre }} »</strong><br/>a bien été reçue.</p>
+      <p class="sent-sub">Vous serez contacté à <strong>{{ formEmail }}</strong> dans les 48h.</p>
+      <button class="btn-submit" style="margin-top:20px" (click)="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>

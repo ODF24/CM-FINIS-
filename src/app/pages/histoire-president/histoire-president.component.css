@@ -1,0 +1,209 @@
+:host { 
+    display: block; 
+    background: #000; 
+    min-height: 100vh; 
+}
+
+/* SECTION PRINCIPALE (HERO) */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 0 20px;
+    /* Image de fond avec double overlay pour l'effet sombre/sunset */
+    background: linear-gradient(to right, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.4) 100%),
+                url('https://res.cloudinary.com/dcno88ooa/image/upload/q_auto/f_auto/v1776360954/Image_2.jpg_1_a0atn0.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+/* BOUTON RETOUR */
+.back-container { margin-bottom: 20px; }
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.orange-text { color: #f5a623; font-weight: bold; margin-right: 8px; }
+.btn-back:hover { opacity: 0.8; transform: translateX(-5px); }
+
+/* TITRES */
+.header h1 {
+    font-family: 'Segoe UI', sans-serif; /* Ou 'Cinzel' si tu préfères le style historique */
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.subtitle {
+    color: #f5a623;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+/* GRILLE DE CONTENU (Répartition 65% / 35%) */
+.content {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* ZONE GAUCHE : VISUEL/VIDÉO */
+.video-box {
+    position: relative;
+    z-index: 5;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    background: #111;
+}
+
+video.detail-main-img {
+    position: relative;
+    z-index: 6; 
+    cursor: pointer;
+}
+.video-container { position: relative; width: 100%; }
+
+.detail-main-img {
+    width: 50%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.video-overlay-shadow {
+    position: absolute;
+    pointer-events: none;
+    z-index: 7;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+}
+
+.video-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+/* ZONE DROITE : PROFIL */
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Carte Portrait & Décoration */
+.profile-card {
+    position: relative;
+    width: fit-content;
+}
+
+.profile-img-container {
+    width: 220px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(245, 166, 35, 0.2);
+}
+
+.portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Décor ethnique flottant sur le côté */
+.ethnic-decor {
+    position: absolute;
+    right: -40px;
+    top: 20%;
+    z-index: 3;
+}
+.logo-img {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+}
+
+/* BLOC À PROPOS */
+.about h3 {
+    color: #f5a623;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.main-bio {
+    font-size: 0.85rem;
+    color: #ddd;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
+/* LISTE INFOS */
+.info-list p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(245, 166, 35, 0.1);
+    padding-bottom: 5px;
+}
+
+.info-list strong {
+    color: #f5a623;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+/* ANIMATIONS */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-main-img {
+  width: 100%;
+  height: auto;
+  border-radius: 9px; /* Pour arrondir les bords si besoin */
+  object-fit: cover;   /* Pour que la vidéo remplisse bien l'espace */
+  display: block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .content { grid-template-columns: 1fr; }
+    .hero { padding-top: 120px; }
+    .profile-img-container { width: 180px; height: 230px; }
+}
+
+.not-found {
+    text-align: center;
+    padding: 100px 0;
+    color: #f5a623;
+}

@@ -1,0 +1,7 @@
+**/.gitignore
+**/.git
+**/.vscode
+README.md
+**/e2e
+**/node_modules
+**/src/assets/images/raw

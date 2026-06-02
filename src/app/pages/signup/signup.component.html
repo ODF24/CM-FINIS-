@@ -1,0 +1,118 @@
+<div class="auth-wrapper">
+
+  <!-- ══ VUE SUCCÈS ══ -->
+  <div class="auth-card success-card" *ngIf="success">
+    <div class="success-anim">
+      <div class="success-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="40" height="40">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+    </div>
+    <h2>Compte créé !</h2>
+    <p class="card-sub">
+      Bienvenue, <strong class="highlight-name">{{ fullname }}</strong><br/>
+      Vous allez être redirigé vers l'immersion…
+    </p>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+
+  <!-- ══ VUE FORMULAIRE ══ -->
+  <div class="auth-card" *ngIf="!success">
+    <div class="card-icon">
+      <img
+        src="https://res.cloudinary.com/dcno88ooa/image/upload/q_auto/f_auto/v1775226034/LOGO-acc_dmr8xp.png"
+        alt="Logo"
+        class="logo-img"/>
+    </div>
+    <h2>Créer un compte</h2>
+    <p class="card-sub">Rejoignez Congo Metaverse</p>
+
+    <div class="error-banner" *ngIf="error">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      {{ error }}
+    </div>
+
+    <form (ngSubmit)="onSubmit()" autocomplete="on">
+
+      <!-- Nom complet -->
+      <div class="input-group">
+        <i class="fas fa-user input-ico"></i>
+        <input
+          type="text" id="fullname"
+          [(ngModel)]="fullname" name="fullname"
+          required placeholder=" " autocomplete="name"/>
+        <label for="fullname">Nom complet</label>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group">
+        <i class="fas fa-envelope input-ico"></i>
+        <input
+          type="email" id="email"
+          [(ngModel)]="email" name="email"
+          required placeholder=" " autocomplete="email"/>
+        <label for="email">Adresse email</label>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="input-group">
+        <i class="fas fa-lock input-ico"></i>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          [(ngModel)]="password" name="password"
+          required placeholder=" " autocomplete="new-password"/>
+        <label for="password">Mot de passe</label>
+        <button type="button" class="eye-btn" (click)="showPassword = !showPassword" tabindex="-1">
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+
+      <!-- Barre de force — utilise les getters, pas de regex dans le template -->
+      <div class="strength-bar" *ngIf="password.length > 0">
+        <div class="strength-fill" [style.width]="strengthWidth" [style.background]="strengthColor"></div>
+      </div>
+      <p class="strength-label" *ngIf="password.length > 0" [style.color]="strengthColor">
+        Force : {{ strengthLabel }}
+      </p>
+
+      <!-- Confirmer -->
+      <div class="input-group" style="margin-top:16px">
+        <i class="fas fa-check-double input-ico"></i>
+        <input
+          [type]="showConfirm ? 'text' : 'password'"
+          id="confirmPassword"
+          [(ngModel)]="confirmPassword" name="confirmPassword"
+          required placeholder=" " autocomplete="new-password"/>
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <button type="button" class="eye-btn" (click)="showConfirm = !showConfirm" tabindex="-1">
+          <i [class]="showConfirm ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+
+      <!-- Correspondance — booléens depuis le composant -->
+      <p class="match-hint ok" *ngIf="passwordsMatch">✓ Les mots de passe correspondent</p>
+      <p class="match-hint ko" *ngIf="passwordsDontMatch">✗ Les mots de passe ne correspondent pas</p>
+
+      <button type="submit" class="btn-primary" [disabled]="loading" style="margin-top:20px">
+        <i class="fas fa-spinner fa-spin" *ngIf="loading"></i>
+        <span>{{ loading ? 'Création du compte…' : 'Créer mon compte' }}</span>
+      </button>
+    </form>
+
+    <div class="divider"><span>ou s'inscrire avec</span></div>
+    <div class="social-row">
+      <a href="#" class="social-btn"><i class="fab fa-google"></i></a>
+      <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+    </div>
+
+    <p class="switch-link">Déjà un compte ? <a routerLink="/inscription">Se connecter</a></p>
+  </div>
+
+</div>

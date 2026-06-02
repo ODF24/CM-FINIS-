@@ -1,0 +1,63 @@
+<div class="culture-container">
+  
+  <!-- SECTION PRÉSENTATION (Capture d'écran 2026-05-23 183747.png) -->
+  <section class="intro-section">
+    <h1 class="section-main-title">Culture & Éducation</h1>
+    <div class="accent-line"></div>
+
+    <div class="intro-text-wrapper">
+      <p class="lead-text">Cet espace est dédié à la transmission vivante du patrimoine culturel congolais.</p>
+      <p>À travers les poésies, les contes traditionnels, les jeux d'enfance, les quiz interactifs et les figures historiques, Congo Metaverse offre aux jeunes générations une nouvelle manière de découvrir leur culture.</p>
+      
+      <p class="highlight-paragraph">
+        Parce que l'éducation ne se limite pas aux manuels scolaires, nous valorisons également les récits, les traditions orales et les savoirs populaires qui façonnent notre identité.<br>
+        <span>Apprendre devient une expérience interactive, ludique et immersive.</span>
+      </p>
+      
+      <p class="motto-text">Apprendre, jouer et grandir avec la culture congolaise. Un trésor de savoir pour les générations futures.</p>
+    </div>
+
+    <!-- Barre de filtres de navigation dynamique -->
+    <div class="filter-tabs-bar">
+      <button 
+        *ngFor="let cat of categories" 
+        [class.active]="selectedCategory === cat.id"
+        (click)="selectCategory(cat.id)">
+        {{ cat.label }}
+      </button>
+    </div>
+
+    <!-- Aperçu à la une (3 premières cartes) -->
+    <div class="cards-showcase-grid">
+      <div class="conte-card featured" *ngFor="let item of featuredItems">
+        <div class="card-glow-indicator"></div>
+        <h3 class="card-item-title">{{ item.title }}</h3>
+        <p class="card-item-description">"{{ item.description }}"</p>
+        <button class="btn-read-more">LIRE LE CONTE</button>
+      </div>
+    </div>
+
+    <div class="scroll-down-indicator" (click)="scrollToGrid()">
+      <span class="chevron-down">▼</span>
+    </div>
+  </section>
+
+  <!-- SECTION LISTE COMPLÈTE / FILTRÉE (Capture d'écran 2026-05-23 183811.png) -->
+  <section id="explore-grid-section" class="grid-display-section">
+    <h2 class="category-display-title">{{ getCategoryTitle() }}</h2>
+    
+    <!-- Grille adaptative gérée dynamiquement par le TS -->
+    <div class="main-content-grid">
+      <div class="conte-card" *ngFor="let item of filteredItems">
+        <h3 class="card-item-title">{{ item.title }}</h3>
+        <p class="card-item-description">"{{ item.description }}"</p>
+        <button class="btn-read-more">LIRE LE CONTE</button>
+      </div>
+    </div>
+
+    <div class="scroll-top-indicator" (click)="scrollTop()">
+      <span class="chevron-up">▲</span>
+    </div>
+  </section>
+
+</div>

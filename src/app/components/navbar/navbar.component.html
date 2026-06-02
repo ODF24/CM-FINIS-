@@ -1,0 +1,90 @@
+<section class="top-bar-section">
+  <nav>
+    <!-- LOGO -->
+    <a routerLink="/home" class="logo">
+      <div class="logo-img-wrapper">
+        <img src="https://res.cloudinary.com/dcno88ooa/image/upload/q_auto/f_auto/v1775226034/LOGO-acc_dmr8xp.png" class="logo-img" alt="Logo Congo Metaverse">
+      </div>
+      <div class="logo-texts">
+        <span class="logo-text">CONGO</span>
+        <span class="logo-sub">METAVERSE</span>
+      </div>
+    </a>
+
+    <!-- LIENS -->
+    <ul class="nav-links">
+      <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">ACCUEIL</a></li>
+      <li><a routerLink="/histoire" routerLinkActive="active">Histoire du Congo</a></li>
+      <li class="dropdown" [class.active-menu]="patrimoineOpen" (click)="$event.stopPropagation()">
+        <a href="#" (click)="togglePatrimoine($event)">
+          Patrimoine <i class="fa-solid fa-chevron-down chev"></i>
+        </a>
+        <ul class="submenu">
+          <li><a routerLink="/patrimoine" routerLinkActive="active">Patrimoine Touristique</a></li>
+          <li><a routerLink="/tourisme" routerLinkActive="active">Patrimoine Culturel</a></li>
+        </ul>
+      </li>
+      <li><a routerLink="/marche-art" routerLinkActive="active">Marché d'Art</a></li>
+      <li><a routerLink="/actualites" routerLinkActive="active">Actualités</a></li>
+      <li><a routerLink="/a-propos" routerLinkActive="active">À propos</a></li>
+    </ul>
+
+    <!-- DROITE -->
+    <div class="nav-right" (click)="$event.stopPropagation()">
+      <a routerLink="/paiement" class="btn-premium">
+        <i class="fa-solid fa-star"></i> Premium
+      </a>
+
+      <!-- NON CONNECTÉ -->
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/inscription" class="user-icon-btn" title="Se connecter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </a>
+      </ng-container>
+
+      <!-- CONNECTÉ -->
+      <ng-container *ngIf="isLoggedIn">
+        <div class="user-menu-wrap" [class.open]="userMenuOpen">
+          <button class="user-avatar-btn" (click)="toggleUserMenu($event)" title="Mon compte">
+            <div class="nav-avatar">{{ initials }}</div>
+          </button>
+
+          <div class="user-dropdown" (click)="$event.stopPropagation()">
+            <div class="ud-header">
+              <div class="ud-avatar">{{ initials }}</div>
+              <div class="ud-info">
+                <div class="ud-name">{{ profile?.full_name || 'Utilisateur' }}</div>
+                <div class="ud-email">{{ profile?.email }}</div>
+              </div>
+            </div>
+            <div class="ud-divider"></div>
+            <a routerLink="/dashboard" class="ud-item" (click)="userMenuOpen=false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+              Tableau de bord
+            </a>
+            <a routerLink="/paiement" class="ud-item" (click)="userMenuOpen=false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Accès Premium
+            </a>
+            <div class="ud-divider"></div>
+            <button class="ud-item ud-logout" (click)="logout($event)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </nav>
+</section>

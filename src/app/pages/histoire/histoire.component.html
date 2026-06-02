@@ -1,0 +1,133 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <canvas id="particles"></canvas>
+  <div class="scanlines"></div>
+
+  <div class="hero-content">
+    <h1>Histoire du Congo</h1>
+    <span class="gline"></span>
+    <p class="lead">Voici un résumé de l'histoire du Congo-Brazzaville, présenté avec exigence historique et sensibilité narrative.</p>
+    <div class="body-txt">
+      <p>Le territoire aujourd'hui appelé République du Congo est habité depuis des millénaires par des peuples bantous, organisés en royaumes et chefferies, dont les plus marquants furent les royaumes <em>Kongo</em>, <em>Téké</em> et <em>Loango</em>.</p>
+      <p>À la fin du XIXᵉ siècle, le territoire entre dans l'histoire moderne avec la fondation de Brazzaville en <em>1880</em> par Pierre Savorgnan de Brazza.</p>
+      <p>Le <em>15 août 1960</em>, le Congo accède à l'indépendance. La République du Congo actuelle est instaurée en <em>1992</em>.</p>
+    </div>
+    <button class="btn" (click)="scrollToBatisseurs()">
+      Découvrir les bâtisseurs
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <!-- MAP PUZZLE -->
+  <div class="map-outer" id="mapOuter">
+    <div class="map-aura"></div>
+    <div class="orb-wrap"><div class="orb orb-a"></div><div class="orb orb-b"></div></div>
+    <div class="map-puzzle">
+      <div class="puzzle-inner" id="puzzleInner">
+        <img *ngFor="let dept of depts"
+          class="dept-img"
+          [class.active]="isDeptActive(dept.id)"
+          [id]="dept.id"
+          [src]="dept.src"
+          [attr.style]="dept.style + 'position:absolute;height:auto;cursor:pointer;'"
+          [alt]="dept.name"
+          (mouseenter)="showTooltip(dept, $event)"
+          (mousemove)="moveTooltip($event)"
+          (mouseleave)="hideTooltip(dept)"
+          (click)="toggleDept(dept.id)"
+        />
+      </div>
+    </div>
+    <div id="tip" [class.show]="tooltipVisible" [style.left.px]="tooltipX" [style.top.px]="tooltipY">
+      <h4>{{ tooltipName }}</h4>
+      <p>{{ tooltipDesc }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- FICHE PAYS -->
+<div class="background-overlay"></div>
+<main class="container">
+  <section class="left-panel">
+    <h1 class="main-title">FICHE PAYS</h1>
+    <div class="map-placeholder">
+      <div class="map-outline"><span class="pin">📍</span></div>
+    </div>
+  </section>
+  <section class="right-panel">
+    <div class="info-group">
+      <h2>ADMINISTRATION</h2>
+      <div class="card">
+        <p><strong>Nom :</strong> République du Congo</p>
+        <p><strong>Devise :</strong> Unité, travail, progrès</p>
+        <p><strong>Hymne :</strong> La Congolaise</p>
+        <p><strong>Forme d'État :</strong> République</p>
+        <p><strong>Président :</strong> Denis Sassou Nguesso</p>
+        <p><strong>Langues officielles :</strong> Français, Kituba et Lingala</p>
+        <p class="capital"><strong>📍 Capitale :</strong> Brazzaville</p>
+      </div>
+    </div>
+    <div class="info-group">
+      <h2>GÉOGRAPHIE</h2>
+      <div class="card">
+        <p><strong>Superficie :</strong> 342 000 km²</p>
+        <p><strong>Pays limitrophes :</strong> Cameroun, Gabon, RCA, RDC et Cabinda</p>
+        <p><strong>Fuseau horaire :</strong> UTC+1</p>
+      </div>
+    </div>
+    <div class="info-group">
+      <h2>DATE HISTORIQUE</h2>
+      <div class="card"><p><strong>Indépendance :</strong> 15 août 1960</p></div>
+    </div>
+    <div class="info-group">
+      <h2>DÉMOGRAPHIE</h2>
+      <div class="card">
+        <p><strong>Population :</strong> 5 125 821 habitants (2017)</p>
+        <p><strong>Densité :</strong> 13 habitants/km²</p>
+      </div>
+    </div>
+    <div class="info-group">
+      <h2>ÉCONOMIE</h2>
+      <div class="card">
+        <p><strong>Monnaie :</strong> Francs CFA (XAF)</p>
+        <p><strong>PIB nominal :</strong> 14,09 milliards USD (2012)</p>
+        <p><strong>IDH :</strong> 0,534 (2013)</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BÂTISSEURS -->
+<section class="batisseurs" id="batisseurs">
+  <div class="section-header fade-up">
+    <h2>Les Bâtisseurs de la Nation</h2>
+    <p>Découvrez les figures historiques qui ont façonné la République du Congo</p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="presidents-slider">
+    <div class="presidents-grid" id="presidentsGrid">
+      <div *ngFor="let p of presidents" class="president-card fade-up">
+        <span class="num-badge">{{ p.num }}</span>
+        <div class="card-img-placeholder">
+          <a [routerLink]="['/histoire', p.id]" class="president-card-link"></a>
+          <img [src]="p.img" [alt]="p.nom"/>
+        </div>
+        <div class="card-body">
+          <h3>{{ p.nom }}</h3>
+          <div class="years">{{ p.annees }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" (click)="slide(-1)">‹</button>
+      <div class="dots">
+        <div *ngFor="let d of dots" class="dot" [class.active]="d === currentSlide" (click)="goTo(d)"></div>
+      </div>
+      <button class="slider-btn" (click)="slide(1)">›</button>
+    </div>
+  </div>
+</section>
+

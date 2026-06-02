@@ -1,0 +1,40 @@
+<div class="pay-bg">
+  <div class="background-overlay"></div>
+  <div class="pay-container">
+    <section class="left-panel">
+      <h1 class="main-title">ADHÉSION</h1>
+      <div class="map-outline">
+        <span class="pin">📍</span>
+        <p class="map-label">Congo Metaverse</p>
+      </div>
+    </section>
+
+    <section class="right-panel">
+      <div class="plan-card featured">
+        <div class="plan-badge">Populaire</div>
+        <h2>Accès Premium</h2>
+        <div class="price">5 000 <span>FCFA/mois</span></div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Archivage 3D illimité</li>
+          <li><i class="fas fa-check"></i> Accès complet à l'histoire</li>
+          <li><i class="fas fa-check"></i> Marché d'art en ligne</li>
+          <li><i class="fas fa-check"></i> Visites virtuelles exclusives</li>
+          <li><i class="fas fa-check"></i> Support prioritaire</li>
+        </ul>
+        <button class="btn-pay" (click)="choisir('premium')">Choisir ce plan</button>
+      </div>
+
+      <div class="plan-card">
+        <h2>Accès Gratuit</h2>
+        <div class="price">0 <span>FCFA</span></div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Histoire du Congo</li>
+          <li><i class="fas fa-check"></i> Carte interactive</li>
+          <li><i class="fas fa-times muted"></i> Archivage 3D</li>
+          <li><i class="fas fa-times muted"></i> Visites virtuelles</li>
+        </ul>
+        <button class="btn-pay secondary" (click)="choisir('gratuit')">Continuer gratuitement</button>
+      </div>
+    </section>
+  </div>
+</div>
