@@ -13,11 +13,14 @@
         <span class="deco-line jaune"></span>
         <span class="deco-line vert"></span>
       </div>
-      <h1>Découvrez tous nos<br/><span class="accent-text">Patrimoine Culturels</span></h1>
+      <h1>Découvrez tous nos<br /><span class="accent-text">Patrimoine Culturels</span></h1>
       <div class="header-body">
         <p>Dans cet espace, vous êtes invités à voyager au cœur de l'histoire du Congo.</p>
-        <p>Ce monde virtuel vous ouvre les portes du patrimoine culturel congolais : des monuments emblématiques aux traditions vivantes, des récits ancestraux aux expressions artistiques qui traversent le temps.</p>
-        <p class="italic-line">Ici, le passé rencontre le futur.<br/>Marchez sur les traces de l'histoire, écoutez la mémoire des lieux et découvrez un patrimoine qui continue de vivre, de créer et d'inspirer. <em class="bold-cta">Bienvenue au cœur culturel du Congo.</em></p>
+        <p>Ce monde virtuel vous ouvre les portes du patrimoine culturel congolais : des monuments emblématiques aux
+          traditions vivantes, des récits ancestraux aux expressions artistiques qui traversent le temps.</p>
+        <p class="italic-line">Ici, le passé rencontre le futur.<br />Marchez sur les traces de l'histoire, écoutez la
+          mémoire des lieux et découvrez un patrimoine qui continue de vivre, de créer et d'inspirer. <em
+            class="bold-cta">Bienvenue au cœur culturel du Congo.</em></p>
       </div>
     </header>
 
@@ -26,7 +29,7 @@
       <div *ngFor="let site of sites" class="site-card" (click)="ouvrirDetail(site)">
         <!-- Image -->
         <div class="card-img">
-          <img [src]="site.image" [alt]="site.nom"/>
+          <img [src]="site.image" [alt]="site.nom" />
           <div class="card-gradient"></div>
           <div class="card-info">
             <p class="card-lieu">{{ site.lieu }}</p>
@@ -36,11 +39,16 @@
         <!-- Actions -->
         <div class="card-actions">
           <button class="btn-action demo" (click)="ouvrirDetail(site); $event.stopPropagation()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
             Video Demo
           </button>
-          <button class="btn-action visite" (click)="ouvrirDetail(site); $event.stopPropagation()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <button class="btn-action visite" (click)="allerAVisite(site.visiteUrl, $event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
             Visite virtuelle 3D
           </button>
         </div>
@@ -49,15 +57,23 @@
 
     <!-- Flèche bas -->
     <div class="scroll-down">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#c8973a" stroke-width="2.5" width="28" height="28"><polyline points="6 9 12 15 18 9"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#c8973a" stroke-width="2" width="24" height="24" style="margin-top:-12px;opacity:0.5"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8973a" stroke-width="2.5" width="28" height="28">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8973a" stroke-width="2" width="24" height="24"
+        style="margin-top:-12px;opacity:0.5">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
     </div>
   </div>
 
   <!-- ══ VUE DÉTAIL ══ -->
   <div class="detail-view" *ngIf="detail">
     <button class="btn-retour" (click)="retour()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+        <polyline points="15 18 9 12 15 6" />
+        <polyline points="9 18 3 12 9 6" />
+      </svg>
       Retour
     </button>
 
@@ -83,14 +99,17 @@
       <aside class="detail-aside">
         <div class="aside-card">
           <div class="aside-img">
-            <img [src]="detail.image" [alt]="detail.nom"/>
+            <img [src]="detail.image" [alt]="detail.nom" />
             <div class="aside-gradient">
               <p class="aside-lieu">CENTRE VILLE BRAZZAVILLE</p>
               <h4>{{ detail.nom }}</h4>
             </div>
           </div>
-          <button class="btn-visite-3d">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <button class="btn-visite-3d" (click)="allerAVisite(detail.visiteUrl, $event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
             Visite Virtuelle 3D
           </button>
         </div>
