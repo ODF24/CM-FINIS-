@@ -22,7 +22,7 @@ export class TourismeComponent {
       id: 'Sainte-anne', lieu: 'CONGO BRAZZAVILLE', nom: 'Basilique Sainte Anne',
       image: 'https://res.cloudinary.com/dcno88ooa/image/upload/v1780995909/basilique_lvda1r.jpg',
       videoUrl: 'https://res.cloudinary.com/dcno88ooa/video/upload/v1776354027/La_basilique_Sainte_Anne_de_Brazzaville_et_son_histoire_ryb0xc.mp4',
-      visiteUrl: 'https://2026-eta-ruby.vercel.app/',
+      visiteUrl: '#',
       description: 'Joyau de l\'architecture religieuse congolaise, la Basilique Sainte-Anne se dresse fièrement au cœur de Brazzaville.',
       histoire: 'Construite entre 1935 et 1949 par les Pères du Saint-Esprit, la basilique Sainte-Anne est un chef-d\'œuvre de l\'art roman en terre africaine. Son clocher vert-de-gris visible de loin est devenu l\'un des symboles iconiques de Brazzaville. Elle accueille chaque année des milliers de fidèles et de visiteurs venus admirer ses fresques intérieures, son architecture unique mêlant influences européennes et touches africaines.'
     },
@@ -50,7 +50,8 @@ export class TourismeComponent {
     {
       id: 'Fresque', lieu: 'CONGO BRAZZAVILLE', nom: 'Fresque le  Peuple Parle Au Peuple',
       image: 'https://res.cloudinary.com/dcno88ooa/image/upload/v1781004409/congo76_rpihou.jpg',
-      videoUrl: 'https://res.cloudinary.com/dcno88ooa/video/upload/v1776354039/Fespam__les_h%C3%A9ro%C3%AFnes_une_cr%C3%A9ation_documentaire_sur_la_rumba_congolaise_pr%C3%A9s_rny60u.mp4', visiteUrl: '#',
+      videoUrl: 'https://res.cloudinary.com/dcno88ooa/video/upload/v1776354039/Fespam__les_h%C3%A9ro%C3%AFnes_une_cr%C3%A9ation_documentaire_sur_la_rumba_congolaise_pr%C3%A9s_rny60u.mp4',
+      visiteUrl: 'https://2026-eta-ruby.vercel.app/',
       description: 'Fresque artistique engagée représentant la voix du peuple congolais, exprimant ses luttes, ses espoirs et son unité à travers l’art mural contemporain.',
       histoire: 'La fresque “Le Peuple Parle Au Peuple” est une œuvre symbolique née dans une démarche de valorisation de l’expression populaire en République du Congo. Elle met en avant la communication directe entre les citoyens à travers l’art urbain, en illustrant les réalités sociales, culturelles et politiques du pays. Elle s’inscrit dans une dynamique de renaissance artistique africaine où la rue devient un espace d’expression et de mémoire collective.'
     }
