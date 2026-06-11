@@ -136,7 +136,334 @@ nav {
 .ud-logout { color: rgba(255,150,150,0.7); }
 .ud-logout:hover { background: rgba(139,0,0,0.2); color: #ff9999; }
 
+/* --- HAMBURGER BUTTON (Hidden by default) --- */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 160;
+}
+.burger-menu span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-light, #F5EDD8);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.burger-menu.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: var(--gold-light, #F0C060);
+}
+.burger-menu.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger-menu.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: var(--gold-light, #F0C060);
+}
+
+/* --- BACKDROP OVERLAY --- */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 140;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- MOBILE SIDE-DRAWER --- */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background: rgba(8, 22, 14, 0.97);
+  backdrop-filter: blur(20px);
+  border-left: 1.5px solid rgba(200, 151, 58, 0.25);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.85);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+
+/* Header inside drawer */
+.drawer-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(200, 151, 58, 0.12);
+}
+.drawer-header .logo-img-wrapper {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  animation: spin-slow 20s linear infinite;
+  box-shadow: none;
+}
+.drawer-header .logo-text {
+  font-size: 0.95rem;
+}
+.drawer-header .logo-sub {
+  font-size: 0.46rem;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-light, #F5EDD8);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover {
+  color: var(--gold-light, #F0C060);
+}
+
+/* Content area inside drawer */
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation Links in Drawer */
+.mobile-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.mobile-links li {
+  width: 100%;
+}
+.mobile-links a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(245, 237, 216, 0.8);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid transparent;
+  transition: all 0.25s;
+}
+.mobile-links a.active {
+  color: var(--gold-light, #F0C060);
+  border-bottom-color: var(--gold, #c8973a);
+  padding-left: 6px;
+}
+.mobile-links a:hover {
+  color: var(--gold-light, #F0C060);
+  padding-left: 6px;
+}
+
+/* Mobile Dropdown Accordion */
+.mobile-dropdown .chev {
+  font-size: 0.6rem;
+  margin-left: 6px;
+  transition: transform 0.3s;
+}
+.mobile-dropdown.active-menu .chev {
+  transform: rotate(180deg);
+}
+.mobile-submenu {
+  list-style: none;
+  padding: 0 0 0 16px;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-dropdown.active-menu .mobile-submenu {
+  max-height: 120px; /* high enough to contain links */
+  margin-top: 8px;
+}
+.mobile-submenu a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(245, 237, 216, 0.65);
+  text-transform: none;
+  letter-spacing: 0.8px;
+  padding: 8px 0;
+}
+.mobile-submenu a:hover, .mobile-submenu a.active {
+  color: var(--gold-light, #F0C060);
+}
+
+.drawer-divider {
+  height: 1px;
+  background: rgba(200, 151, 58, 0.12);
+  margin-bottom: 24px;
+}
+
+/* Actions */
+.mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Mobile Premium Button */
+.btn-premium.mobile-premium-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  font-size: 0.8rem;
+  border-radius: 25px;
+}
+
+/* Login Mobile Button */
+.btn-login-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1.5px solid rgba(200, 151, 58, 0.3);
+  color: rgba(245, 237, 216, 0.85);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(200, 151, 58, 0.05);
+  transition: all 0.25s;
+}
+.btn-login-mobile:hover {
+  border-color: var(--gold, #c8973a);
+  color: var(--gold-light, #F0C060);
+  background: rgba(200, 151, 58, 0.12);
+}
+
+/* User Info Section inside Drawer */
+.drawer-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+.drawer-user-info .nav-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.user-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.user-name {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-light, #F5EDD8);
+}
+.user-email {
+  font-size: 0.7rem;
+  color: var(--text-dim, #a09070);
+  word-break: break-all;
+}
+
+/* Mobile User Submenu */
+.mobile-user-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mobile-user-links a, .btn-logout-mobile {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(245, 237, 216, 0.75);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(200, 151, 58, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-align: left;
+  cursor: pointer;
+}
+.mobile-user-links a svg, .btn-logout-mobile svg {
+  opacity: 0.7;
+}
+.mobile-user-links a:hover {
+  background: rgba(200, 151, 58, 0.08);
+  color: var(--gold-light, #F0C060);
+  border-color: rgba(200, 151, 58, 0.25);
+}
+.btn-logout-mobile {
+  color: rgba(255, 150, 150, 0.8);
+  background: rgba(139, 0, 0, 0.05);
+  border-color: rgba(255, 100, 100, 0.1);
+}
+.btn-logout-mobile:hover {
+  background: rgba(139, 0, 0, 0.15);
+  color: #ff9999;
+  border-color: rgba(255, 100, 100, 0.25);
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1100px) {
   .nav-links { display: none; }
   nav { padding: 0 18px; }
+  
+  .burger-menu {
+    display: flex;
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide the Premium Button from header on small screens to fit Logo and Avatar */
+  nav .btn-premium {
+    display: none;
+  }
 }

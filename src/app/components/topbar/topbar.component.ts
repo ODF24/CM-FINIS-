@@ -15,6 +15,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
   patrimoineOpen = false;
   userMenuOpen = false;
   isLoggedIn = false;
+  mobileMenuOpen = false;
   profile: UserProfile | null = null;
   private sub: Subscription | null = null;
 
@@ -42,10 +43,8 @@ export class TopbarComponent implements OnInit, OnDestroy {
   }
 
   togglePatrimoine(event: Event) {
-    if (window.innerWidth < 1100) {
-      event.preventDefault();
-      this.patrimoineOpen = !this.patrimoineOpen;
-    }
+    event.preventDefault();
+    this.patrimoineOpen = !this.patrimoineOpen;
   }
 
   toggleUserMenu(event: Event) {
@@ -53,15 +52,22 @@ export class TopbarComponent implements OnInit, OnDestroy {
     this.userMenuOpen = !this.userMenuOpen;
   }
 
+  toggleMobileMenu(event: Event) {
+    event.stopPropagation();
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
   @HostListener('document:click')
   closeMenus() {
     this.userMenuOpen = false;
     this.patrimoineOpen = false;
+    this.mobileMenuOpen = false;
   }
 
   async logout(event: Event) {
     event.stopPropagation();
     this.userMenuOpen = false;
+    this.mobileMenuOpen = false;
     await this.supabase.signOut();
   }
 }
